@@ -1,0 +1,112 @@
+﻿<Window x:Class="RingScenarioGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RingScenarioGenerator"
+        mc:Ignorable="d"
+        Title="MainWindow"   SizeToContent="WidthAndHeight">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="500"/>
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <Canvas Background="black" Margin="0" Grid.Column="0" Grid.Row="1" Height="450" Width="450">
+
+                <!--ring 1 -->
+                <Ellipse Width="20"  Height="20" x:Name="led1_1" Canvas.Left="259" Canvas.Top="11"     Fill="{Binding Brush1_1}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_2" Canvas.Left="304" Canvas.Top="29"     Fill="{Binding Brush1_2}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_3" Canvas.Left="341" Canvas.Top="59"     Fill="{Binding Brush1_3}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_4" Canvas.Left="375" Canvas.Top="106"    Fill="{Binding Brush1_4}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_5" Canvas.Left="393" Canvas.Top="150"    Fill="{Binding Brush1_5}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_6" Canvas.Left="400" Canvas.Top="200"    Fill="{Binding Brush1_6}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_7" Canvas.Left="393" Canvas.Top="250"    Fill="{Binding Brush1_7}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_8" Canvas.Left="375" Canvas.Top="298"    Fill="{Binding Brush1_8}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_9" Canvas.Left="341" Canvas.Top="340"    Fill="{Binding Brush1_9}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_10" Canvas.Left="304" Canvas.Top="370"   Fill="{Binding Brush1_10}" />
+                <Ellipse Width="20"  Height="20" x:Name="led1_11" Canvas.Left="259" Canvas.Top="390"   Fill="{Binding Brush1_11}" />
+                <Ellipse Width="20"  Height="20" x:Name="led1_12" Canvas.Left="200" Canvas.Top="400"   Fill="{Binding Brush1_12}" />
+                <Ellipse Width="20"  Height="20" x:Name="led1_13" Canvas.Left="140" Canvas.Top="390"   Fill="{Binding Brush1_13}" />
+                <Ellipse Width="20"  Height="20" x:Name="led1_14" Canvas.Left="95" Canvas.Top="370"    Fill="{Binding Brush1_14}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_15" Canvas.Left="59" Canvas.Top="341"    Fill="{Binding Brush1_15}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_16" Canvas.Left="26" Canvas.Top="298"    Fill="{Binding Brush1_16}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_17" Canvas.Left="6" Canvas.Top="250"     Fill="{Binding Brush1_17}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_18" Canvas.Left="0" Canvas.Top="200"     Fill="{Binding Brush1_18}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_19" Canvas.Left="6" Canvas.Top="150"     Fill="{Binding Brush1_19}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_20" Canvas.Left="26" Canvas.Top="99"     Fill="{Binding Brush1_20}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_21" Canvas.Left="59" Canvas.Top="60"     Fill="{Binding Brush1_21}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_22" Canvas.Left="95" Canvas.Top="29"     Fill="{Binding Brush1_22}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_23" Canvas.Left="140" Canvas.Top="11"    Fill="{Binding Brush1_23}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led1_24" Canvas.Left="200" Canvas.Top="0"     Fill="{Binding Brush1_24}"/>
+
+                <!--ring 2 -->
+                <Ellipse Width="20"  Height="20" x:Name="led2_1" Canvas.Left="255" Canvas.Top="61"   Fill="{Binding Brush2_1}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led2_2" Canvas.Left="306" Canvas.Top="95"   Fill="{Binding Brush2_2}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led2_3" Canvas.Left="339" Canvas.Top="146"  Fill="{Binding Brush2_3}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led2_4" Canvas.Left="350" Canvas.Top="200"  Fill="{Binding Brush2_4}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led2_5" Canvas.Left="337" Canvas.Top="260"  Fill="{Binding Brush2_5}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led2_6" Canvas.Left="306" Canvas.Top="305"  Fill="{Binding Brush2_6}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led2_7" Canvas.Left="262" Canvas.Top="336"  Fill="{Binding Brush2_7}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led2_8" Canvas.Left="200" Canvas.Top="350"  Fill="{Binding Brush2_8}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led2_9" Canvas.Left="140" Canvas.Top="336"  Fill="{Binding Brush2_9}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led2_10" Canvas.Left="95" Canvas.Top="305"  Fill="{Binding Brush2_10}" />
+                <Ellipse Width="20"  Height="20" x:Name="led2_11" Canvas.Left="60" Canvas.Top="260"  Fill="{Binding Brush2_11}" />
+                <Ellipse Width="20"  Height="20" x:Name="led2_12" Canvas.Left="51" Canvas.Top="200"  Fill="{Binding Brush2_12}" />
+                <Ellipse Width="20"  Height="20" x:Name="led2_13" Canvas.Left="63" Canvas.Top="139"  Fill="{Binding Brush2_13}" />
+                <Ellipse Width="20"  Height="20" x:Name="led2_14" Canvas.Left="95" Canvas.Top="95"   Fill="{Binding Brush2_14}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led2_15" Canvas.Left="146" Canvas.Top="61"  Fill="{Binding Brush2_15}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led2_16" Canvas.Left="200" Canvas.Top="50"  Fill="{Binding Brush2_16}"/>
+
+                <!--ring3 -->
+                <Ellipse Width="20"  Height="20" x:Name="led3_1" Canvas.Left="247" Canvas.Top="112"  Fill="{Binding Brush3_1}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led3_2" Canvas.Left="290" Canvas.Top="155"  Fill="{Binding Brush3_2}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led3_3" Canvas.Left="300" Canvas.Top="200"  Fill="{Binding Brush3_3}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led3_4" Canvas.Left="287" Canvas.Top="246"  Fill="{Binding Brush3_4}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led3_5" Canvas.Left="245" Canvas.Top="287"  Fill="{Binding Brush3_5}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led3_6" Canvas.Left="200" Canvas.Top="300"  Fill="{Binding Brush3_6}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led3_7" Canvas.Left="152" Canvas.Top="287"  Fill="{Binding Brush3_7}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led3_8" Canvas.Left="113" Canvas.Top="246"  Fill="{Binding Brush3_8}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led3_9" Canvas.Left="100" Canvas.Top="200"  Fill="{Binding Brush3_9}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led3_10" Canvas.Left="113" Canvas.Top="155" Fill="{Binding Brush3_10}" />
+                <Ellipse Width="20"  Height="20" x:Name="led3_11" Canvas.Left="152" Canvas.Top="113" Fill="{Binding Brush3_11}" />
+                <Ellipse Width="20"  Height="20" x:Name="led3_12" Canvas.Left="200" Canvas.Top="100" Fill="{Binding Brush3_12}" />
+
+                <!--ring4 -->
+                <Ellipse Width="20"  Height="20" x:Name="led4_1" Canvas.Left="235" Canvas.Top="165"  Fill="{Binding Brush4_1}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led4_2" Canvas.Left="249" Canvas.Top="200"  Fill="{Binding Brush4_2}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led4_3" Canvas.Left="235" Canvas.Top="235"  Fill="{Binding Brush4_3}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led4_4" Canvas.Left="200" Canvas.Top="250"  Fill="{Binding Brush4_4}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led4_5" Canvas.Left="165" Canvas.Top="235"  Fill="{Binding Brush4_5}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led4_6" Canvas.Left="150" Canvas.Top="200"  Fill="{Binding Brush4_6}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led4_7" Canvas.Left="165" Canvas.Top="165"  Fill="{Binding Brush4_7}"/>
+                <Ellipse Width="20"  Height="20" x:Name="led4_8" Canvas.Left="200" Canvas.Top="150"  Fill="{Binding Brush4_8}"/>
+
+
+                <!--ring 5 -->
+                <Ellipse     Width="20"  Height="20"  x:Name="led5_1" Canvas.Left="200" Canvas.Top="200" Fill="{Binding Brush5_1}" />
+
+
+                <!-- layout debug-->
+                <Ellipse x:Name="Ring1"  Width="400"  Height="400" Fill="Transparent" Stroke="White"  StrokeThickness="1"   Canvas.Left="10" Canvas.Top="10" />
+                <Ellipse x:Name="Ring2"  Width="300"  Height="300" Fill="Transparent" Stroke="White"  StrokeThickness="1"   Canvas.Left="60" Canvas.Top="60" />
+                <Ellipse x:Name="Ring3"  Width="200"  Height="200" Fill="Transparent" Stroke="White"  StrokeThickness="1"   Canvas.Left="110" Canvas.Top="110" />
+                <Ellipse x:Name="Ring4"  Width="100"  Height="100" Fill="Transparent" Stroke="White"  StrokeThickness="1"   Canvas.Left="160" Canvas.Top="160" />
+                <Line x:Name="Line1" X1="10" Y1="10" X2="410" Y2="410" Stroke="Red" />
+                <Line x:Name="Line2" X1="410" Y1="10" X2="10" Y2="410" Stroke="Red" />
+                <Line x:Name="Line3" X1="210" Y1="10" X2="210" Y2="450" Stroke="Red" />
+                <Line x:Name="Line4" X1="410" Y1="210" X2="10" Y2="210" Stroke="Red" />
+
+
+                <Line x:Name="Line1bis" X1="110" Y1="10" X2="310" Y2="410" Stroke="White" />
+                <Line x:Name="Line2bis" X1="410" Y1="110" X2="010" Y2="310" Stroke="White" />
+                <Line x:Name="Line3bis" X1="310" Y1="10" X2="110" Y2="410" Stroke="White" />
+                <Line x:Name="Line4bis" X1="010" Y1="110" X2="410" Y2="310" Stroke="White" />
+
+            </Canvas>
+            <Button Command="{Binding Path=OnMyButtonClick}"  FontStretch="Normal"  Margin="2" Grid.Column="0" Grid.Row="2" Content="Click me"/>
+        </Grid>
+
+    </Grid>
+</Window>
