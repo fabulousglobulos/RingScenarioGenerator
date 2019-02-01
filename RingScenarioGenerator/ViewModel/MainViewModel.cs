@@ -15,11 +15,13 @@ namespace RingScenarioGenerator.ViewModel
     {
         public const int TOTAL_LED = 61;
 
+        Random rd = new Random();
+
         public ICommand OnMyButtonClick { get; set; }
 
         public MainViewModel()
         {
-            var defaultbrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+            var defaultbrush = BuildBrush(255, 0, 0);
             var defaultColors = new List<Brush>();
             for (int i = 0; i < TOTAL_LED; i++)
             {
@@ -42,15 +44,87 @@ namespace RingScenarioGenerator.ViewModel
             }
         }
 
+        Task runingTask = null;
+        CancellationTokenSource source = new CancellationTokenSource();
+        CancellationToken token;
 
 
         public async void OnMyButtonClickImpl()
         {
-            try
+            if (runingTask != null)
             {
-                for (int loopi = 0; loopi < 1000; loopi++)
+                if (source != null)
                 {
+                    source.Cancel();
+                }
+                runingTask = null;
+            }
+            else
+            {
+                source = new CancellationTokenSource();
+                token = source.Token;
 
+                Action action = new Action(() =>
+                {
+                    try
+                    {
+                        //tail();
+                        Aleatoire();
+                    }
+                    catch (OperationCanceledException)
+                    {
+
+                    }
+                    catch (Exception E)
+                    {
+                        MessageBox.Show(E.ToString());
+                    }
+                });
+
+                runingTask = Task.Run(action, token);
+            }
+        }
+
+        public void tail()
+        {
+            int head = 0;
+            bool running = true;
+
+            while (running)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+               {
+                   var colors = new List<Brush>();
+                   for (int i = 0; i < TOTAL_LED; i++)
+                   {
+                       int blue = 0;
+                       if (i == head) { blue = 50; }
+                       if ((i - 1) == head) { blue = 150; }
+                       if ((i - 2) == head) { blue = 255; }
+
+                       colors.Add(BuildBrush(0, 0, blue));
+                   }
+
+                   UpdateAllLeds(colors);
+               });
+
+                token.ThrowIfCancellationRequested();
+                head++;
+                if (head > TOTAL_LED)
+                {
+                    head = 0;
+                }
+                System.Threading.Thread.Sleep(100);
+            }
+        }
+
+
+        public  void Aleatoire()
+        {
+            for (int loopi = 0; loopi < 1000; loopi++)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
                     var colors = new List<Brush>();
                     for (int i = 0; i < TOTAL_LED; i++)
                     {
@@ -58,22 +132,11 @@ namespace RingScenarioGenerator.ViewModel
                         colors.Add(random);
                     }
 
+                    UpdateAllLeds(colors);
+                });
 
-                    var t = Task.Run(() =>
-                    {
-                       // MessageBox.Show("hello world");
-
-                        UpdateAllLeds(colors);
-                        System.Threading.Thread.Sleep(100);
-
-
-                       // MessageBox.Show("after hello world");
-                    });
-                }
-            }
-            catch (Exception E)
-            {
-                MessageBox.Show(E.ToString());
+                token.ThrowIfCancellationRequested();
+                System.Threading.Thread.Sleep(100);
             }
         }
 
@@ -146,17 +209,20 @@ namespace RingScenarioGenerator.ViewModel
             Brush5_1 = colors[60];
 
         }
-        Random rd = new Random();
+
         private Brush getRandomBrush()
         {
-
             int r = rd.Next(0, 255);
             int g = rd.Next(0, 255);
             int b = rd.Next(0, 255);
-            return new SolidColorBrush(Color.FromRgb(Convert.ToByte(r), Convert.ToByte(g), Convert.ToByte(b)));
+            return BuildBrush(r, g, b);
         }
 
 
+        private Brush BuildBrush(int r, int g, int b)
+        {
+            return new SolidColorBrush(Color.FromRgb(Convert.ToByte(r), Convert.ToByte(g), Convert.ToByte(b)));
+        }
 
 
 
