@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RingScenarioGenerator.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace RingScenarioGenerator.ViewModel
 
         public MainViewModel()
         {
-            var defaultbrush = BuildBrush(255, 0, 0);
+            var defaultbrush = BrushHelper.BuildBrush(255, 0, 0);
             var defaultColors = new List<Brush>();
             for (int i = 0; i < TOTAL_LED; i++)
             {
@@ -102,7 +103,7 @@ namespace RingScenarioGenerator.ViewModel
                        if ((i - 1) == head) { blue = 150; }
                        if ((i - 2) == head) { blue = 255; }
 
-                       colors.Add(BuildBrush(0, 0, blue));
+                       colors.Add(BrushHelper.BuildBrush(0, 0, blue));
                    }
 
                    UpdateAllLeds(colors);
@@ -215,14 +216,11 @@ namespace RingScenarioGenerator.ViewModel
             int r = rd.Next(0, 255);
             int g = rd.Next(0, 255);
             int b = rd.Next(0, 255);
-            return BuildBrush(r, g, b);
+            return BrushHelper.BuildBrush(r, g, b);
         }
 
 
-        private Brush BuildBrush(int r, int g, int b)
-        {
-            return new SolidColorBrush(Color.FromRgb(Convert.ToByte(r), Convert.ToByte(g), Convert.ToByte(b)));
-        }
+    
 
 
 
