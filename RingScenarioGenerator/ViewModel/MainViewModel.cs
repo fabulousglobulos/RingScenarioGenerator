@@ -12,11 +12,9 @@ using System.Windows.Media;
 
 namespace RingScenarioGenerator.ViewModel
 {
-    public partial class MainViewModel : INotifyPropertyChanged
+    public partial class MainViewModel : INotifyPropertyChanged , IViewPublisher
     {
-        public const int TOTAL_LED = 61;
-
-        Random rd = new Random();
+        private IScenarioGenerator _scenario = null;   
 
         public ICommand OnMyButtonClick { get; set; }
 
@@ -24,7 +22,7 @@ namespace RingScenarioGenerator.ViewModel
         {
             var defaultbrush = BrushHelper.BuildBrush(255, 0, 0);
             var defaultColors = new List<Brush>();
-            for (int i = 0; i < TOTAL_LED; i++)
+            for (int i = 0; i < ScenarioGenerator.TOTAL_LED; i++)
             {
                 defaultColors.Add(defaultbrush);
             }
@@ -32,6 +30,8 @@ namespace RingScenarioGenerator.ViewModel
 
 
             OnMyButtonClick = new RelayCommand(cmd => OnMyButtonClickImpl());
+
+            _scenario = new ScenarioGenerator();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -44,6 +44,7 @@ namespace RingScenarioGenerator.ViewModel
                 handlers(this, args);
             }
         }
+
 
         Task runingTask = null;
         CancellationTokenSource source = new CancellationTokenSource();
@@ -70,7 +71,7 @@ namespace RingScenarioGenerator.ViewModel
                     try
                     {
                         //tail();
-                        Aleatoire();
+                        _scenario.Aleatoire(this, token);
                     }
                     catch (OperationCanceledException)
                     {
@@ -86,60 +87,9 @@ namespace RingScenarioGenerator.ViewModel
             }
         }
 
-        public void tail()
-        {
-            int head = 0;
-            bool running = true;
+      
 
-            while (running)
-            {
-                Application.Current.Dispatcher.Invoke(() =>
-               {
-                   var colors = new List<Brush>();
-                   for (int i = 0; i < TOTAL_LED; i++)
-                   {
-                       int blue = 0;
-                       if (i == head) { blue = 50; }
-                       if ((i - 1) == head) { blue = 150; }
-                       if ((i - 2) == head) { blue = 255; }
-
-                       colors.Add(BrushHelper.BuildBrush(0, 0, blue));
-                   }
-
-                   UpdateAllLeds(colors);
-               });
-
-                token.ThrowIfCancellationRequested();
-                head++;
-                if (head > TOTAL_LED)
-                {
-                    head = 0;
-                }
-                System.Threading.Thread.Sleep(100);
-            }
-        }
-
-
-        public  void Aleatoire()
-        {
-            for (int loopi = 0; loopi < 1000; loopi++)
-            {
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    var colors = new List<Brush>();
-                    for (int i = 0; i < TOTAL_LED; i++)
-                    {
-                        var random = getRandomBrush();
-                        colors.Add(random);
-                    }
-
-                    UpdateAllLeds(colors);
-                });
-
-                token.ThrowIfCancellationRequested();
-                System.Threading.Thread.Sleep(100);
-            }
-        }
+  
 
         public void UpdateAllLeds(List<Brush> colors)
         {
@@ -211,72 +161,11 @@ namespace RingScenarioGenerator.ViewModel
 
         }
 
-        private Brush getRandomBrush()
-        {
-            int r = rd.Next(0, 255);
-            int g = rd.Next(0, 255);
-            int b = rd.Next(0, 255);
-            return BrushHelper.BuildBrush(r, g, b);
-        }
+     
 
 
     
 
-
-
-
-        //        private void generateDefinition()
-        //        {
-        //            string final = string.Empty;
-        //            for (int i = 1; i <= 24; i++)
-        //            {
-        //                final += Generate("1_" + i);
-
-        //            }
-
-        //            for (int i = 1; i <= 16; i++)
-        //            {
-        //                final += Generate("2_" + i);
-
-        //            }
-
-        //            for (int i = 1; i <= 12; i++)
-        //            {
-        //                final += Generate("3_" + i);
-
-        //            }
-
-        //            for (int i = 1; i <= 8; i++)
-        //            {
-        //                final += Generate("4_" + i);
-
-        //            }
-
-        //            final += Generate("5_1");
-        //        }
-
-
-
-        //        private string Generate(string template)
-        //        {
-        //            return @"private Brush _b" + template + @";
-
-        //        public Brush Brush" + template + @"
-        //        {
-        //            get { return _b" + template + @"; }
-        //            set
-        //            {
-        //                if (value != _b" + template + @")
-        //                {
-        //                    _b" + template + @" = value;
-        //                    OnPropertyChanged(""Brush" + template + @""");
-        //                }
-        //            }
-        //        } 
-
-
-        //";
-        //        }
 
     }
 }

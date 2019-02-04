@@ -12,7 +12,7 @@ namespace RinScenarioGenerator.UnitTests
     public class MainViewModelTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void Should_update_all_binding()
         {
             MainViewModel vm = new MainViewModel();
 
