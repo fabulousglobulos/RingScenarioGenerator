@@ -18,11 +18,18 @@ namespace RingScenarioGenerator
 
         Random rd = new Random();
 
+
+        public static Action WaitAction = () => System.Threading.Thread.Sleep(100);
+
+        public static Action<Action> DispatcherInvocker = (action) => Application.Current.Dispatcher.Invoke(action);
+
+
         public void Aleatoire(IViewPublisher publisher, CancellationToken token)
         {
             for (int loopi = 0; loopi < 1000; loopi++)
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                // Application.Current.Dispatcher.Invoke(() =>
+                DispatcherInvocker(()=>
                 {
                     var colors = new List<Brush>();
                     for (int i = 0; i < TOTAL_LED; i++)
@@ -35,7 +42,7 @@ namespace RingScenarioGenerator
                 });
 
                 token.ThrowIfCancellationRequested();
-                System.Threading.Thread.Sleep(100);
+                WaitAction();
             }
         }
 
@@ -52,10 +59,13 @@ namespace RingScenarioGenerator
             int head = 0;
             bool running = true;
 
-            while (running)
+            int loop = 0;
+
+            while (loop <1000)
             {
-                Application.Current.Dispatcher.Invoke(() =>
-                {
+                //kApplication.Current.Dispatcher.Invoke(() =>
+                  DispatcherInvocker(() =>
+                  {
                     var colors = new List<Brush>();
                     for (int i = 0; i < TOTAL_LED; i++)
                     {
@@ -76,7 +86,8 @@ namespace RingScenarioGenerator
                 {
                     head = 0;
                 }
-                System.Threading.Thread.Sleep(100);
+                WaitAction();
+                loop++;
             }
         }
 
