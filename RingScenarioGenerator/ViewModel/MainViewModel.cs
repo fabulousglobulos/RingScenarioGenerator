@@ -71,7 +71,7 @@ namespace RingScenarioGenerator.ViewModel
                     try
                     {
                         //tail();
-                        _scenario.Aleatoire(this, token);
+                        _scenario.Christmas(this, token);
                     }
                     catch (OperationCanceledException)
                     {

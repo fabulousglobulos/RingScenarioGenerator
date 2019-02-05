@@ -24,11 +24,39 @@ namespace RingScenarioGenerator
         public static Action<Action> DispatcherInvocker = (action) => Application.Current.Dispatcher.Invoke(action);
 
 
+        public void Christmas(IViewPublisher publisher, CancellationToken token)
+        {
+            for (int loopi = 0; loopi < 1000; loopi++)
+            {
+                DispatcherInvocker(() =>
+                {
+                    var colors = new List<Brush>();
+                    for (int i = 0; i < TOTAL_LED; i++)
+                    {
+                        var green = BrushHelper.BuildBrush(0, 255,0);
+                        colors.Add(green);
+                    }
+
+                    for(int i =0; i<5;i++)
+                    {
+                        var ind = rd.Next(0, TOTAL_LED);
+                        colors[ind] = BrushHelper.BuildBrush(255, 255, 255);
+                    }
+
+                    publisher.UpdateAllLeds(colors);
+                });
+
+                token.ThrowIfCancellationRequested();
+                WaitAction();
+            }
+        }
+
+
+
         public void Aleatoire(IViewPublisher publisher, CancellationToken token)
         {
             for (int loopi = 0; loopi < 1000; loopi++)
             {
-                // Application.Current.Dispatcher.Invoke(() =>
                 DispatcherInvocker(()=>
                 {
                     var colors = new List<Brush>();
@@ -63,7 +91,6 @@ namespace RingScenarioGenerator
 
             while (loop <1000)
             {
-                //kApplication.Current.Dispatcher.Invoke(() =>
                   DispatcherInvocker(() =>
                   {
                     var colors = new List<Brush>();

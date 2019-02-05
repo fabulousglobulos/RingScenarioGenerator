@@ -105,7 +105,10 @@
                 <Line x:Name="Line4bis" X1="010" Y1="110" X2="410" Y2="310" Stroke="White" />
 
             </Canvas>
-            <Button Command="{Binding Path=OnMyButtonClick}"  FontStretch="Normal"  Margin="2" Grid.Column="0" Grid.Row="2" Content="Click me"/>
+            <StackPanel Orientation="Vertical" FlowDirection="LeftToRight" Grid.Column="0" Grid.Row="2" >
+                <Button Command="{Binding Path=OnMyButtonClick}"  FontStretch="Normal"  Margin="2" Content="Run Scenario"/>
+                <Button  FontStretch="Normal"  Margin="2" Content="Debug grid" Click="debugGrid_Click"/>
+            </StackPanel>
         </Grid>
 
     </Grid>

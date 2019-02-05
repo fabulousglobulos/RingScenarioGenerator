@@ -7,5 +7,6 @@ namespace RingScenarioGenerator
     {
         void Aleatoire(IViewPublisher publisher, CancellationToken token);
         void Tail(IViewPublisher publisher, CancellationToken token);
+        void Christmas(IViewPublisher publisher, CancellationToken token);
     }
 }

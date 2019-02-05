@@ -26,26 +26,35 @@ namespace RingScenarioGenerator
             InitializeComponent();
             this.DataContext = new MainViewModel();
 
-            if(!System.Diagnostics.Debugger.IsAttached)
-            {
-                Ring1.Visibility = Visibility.Hidden;
-                Ring2.Visibility = Visibility.Hidden;
-                Ring3.Visibility = Visibility.Hidden;
-                Ring4.Visibility = Visibility.Hidden;
-                Line1.Visibility = Visibility.Hidden;
-                Line2.Visibility = Visibility.Hidden;
-                Line3.Visibility = Visibility.Hidden;
-                Line4.Visibility = Visibility.Hidden;
-                Line1bis.Visibility = Visibility.Hidden;
-                Line2bis.Visibility = Visibility.Hidden;
-                Line3bis.Visibility = Visibility.Hidden;
-                Line4bis.Visibility = Visibility.Hidden;
-            }
-
-   
+            debugGrid_Click(null, null);
         }
 
+        Visibility debugInfo = Visibility.Hidden;
 
+        private void debugGrid_Click(object sender, RoutedEventArgs e)
+        {
+            Ring1.Visibility = debugInfo;
+            Ring2.Visibility = debugInfo;
+            Ring3.Visibility = debugInfo;
+            Ring4.Visibility = debugInfo;
+            Line1.Visibility = debugInfo;
+            Line2.Visibility = debugInfo;
+            Line3.Visibility = debugInfo;
+            Line4.Visibility = debugInfo;
+            Line1bis.Visibility = debugInfo;
+            Line2bis.Visibility = debugInfo;
+            Line3bis.Visibility = debugInfo;
+            Line4bis.Visibility = debugInfo;
 
+            if (debugInfo == Visibility.Hidden)
+            {
+                debugInfo = Visibility.Visible;
+            }
+            else
+            {
+                debugInfo = Visibility.Hidden;
+            }
+        }
     }
 }
+
