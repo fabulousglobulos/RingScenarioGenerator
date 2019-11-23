@@ -1,4 +1,5 @@
-﻿using RingScenarioGenerator.ViewModel;
+﻿using RingScenarioGenerator.Model.Scenarii;
+using RingScenarioGenerator.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,11 @@ namespace RingScenarioGenerator
             else
             {
                 debugInfo = Visibility.Hidden;
+            }
+
+            if(AbstractScenario.TOTAL_LED == 60)
+            {
+                led5_1.Visibility = Visibility.Hidden;
             }
         }
     }

@@ -57,6 +57,11 @@
     <Compile Include="Helper\BrushHelper.cs" />
     <Compile Include="Interfaces\IViewPublisher.cs" />
     <Compile Include="Interfaces\IScenarioGenerator.cs" />
+    <Compile Include="Model\Scenarii\Common\EScenario.cs" />
+    <Compile Include="Model\Scenarii\Common\AbstractScenario.cs" />
+    <Compile Include="Model\Scenarii\RandomScenario.cs" />
+    <Compile Include="Model\Scenarii\TailScenario.cs" />
+    <Compile Include="Model\Scenarii\XmasScenario.cs" />
     <Compile Include="Model\ScenarioGenerator.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel_binding.cs" />

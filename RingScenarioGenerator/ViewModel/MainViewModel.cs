@@ -1,4 +1,5 @@
 ﻿using RingScenarioGenerator.Helper;
+using RingScenarioGenerator.Model.Scenarii;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,11 +10,38 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Collections.ObjectModel;
 
 namespace RingScenarioGenerator.ViewModel
 {
     public partial class MainViewModel : INotifyPropertyChanged , IViewPublisher
     {
+
+        private string _selectedScenario;
+        public string SelectedScenario
+        {
+            get { return _selectedScenario; }
+            set
+            {
+                if (value != this._selectedScenario)
+                    _selectedScenario = value;
+                this.OnPropertyChanged("SelectedScenario");
+            }
+        }
+
+        private ObservableCollection<string> _scenarioCollection;
+        public ObservableCollection<string> ScenarioCollection
+        {
+            get { return _scenarioCollection; }
+            set
+            {
+                if (value != this._scenarioCollection)
+                    _scenarioCollection = value;
+                this.OnPropertyChanged("FileObjectCollection");
+            }
+        }
+
+
         private IScenarioGenerator _scenario = null;   
 
         public ICommand OnMyButtonClick { get; set; }
@@ -22,7 +50,7 @@ namespace RingScenarioGenerator.ViewModel
         {
             var defaultbrush = BrushHelper.BuildBrush(255, 0, 0);
             var defaultColors = new List<Brush>();
-            for (int i = 0; i < ScenarioGenerator.TOTAL_LED; i++)
+            for (int i = 0; i < AbstractScenario.TOTAL_LED; i++)
             {
                 defaultColors.Add(defaultbrush);
             }
@@ -32,6 +60,11 @@ namespace RingScenarioGenerator.ViewModel
             OnMyButtonClick = new RelayCommand(cmd => OnMyButtonClickImpl());
 
             _scenario = new ScenarioGenerator();
+
+            var scenariiList = new ObservableCollection<string>();
+            Enum.GetValues(typeof(EScenario)).Cast<EScenario>().ToList().ForEach(x => scenariiList.Add(x.ToString()));
+            this.ScenarioCollection = scenariiList;
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -71,7 +104,7 @@ namespace RingScenarioGenerator.ViewModel
                     try
                     {
                         //tail();
-                        _scenario.Christmas(this, token);
+                        _scenario.Animate(  _selectedScenario,  this, token);
                     }
                     catch (OperationCanceledException)
                     {
@@ -86,10 +119,7 @@ namespace RingScenarioGenerator.ViewModel
                 runingTask = Task.Run(action, token);
             }
         }
-
-      
-
-  
+ 
 
         public void UpdateAllLeds(List<Brush> colors)
         {
@@ -156,16 +186,11 @@ namespace RingScenarioGenerator.ViewModel
             Brush4_6 = colors[57];
             Brush4_7 = colors[58];
             Brush4_8 = colors[59];
-
-            Brush5_1 = colors[60];
-
+            if (AbstractScenario.TOTAL_LED > 60)
+            {
+                Brush5_1 = colors[60];
+            }
         }
-
-     
-
-
-    
-
 
     }
 }

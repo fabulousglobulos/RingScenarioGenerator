@@ -16,38 +16,38 @@ namespace RinScenarioGenerator.UnitTests
     {
         IViewPublisher _publisherMocker = A.Fake<IViewPublisher>();
 
-        [TestMethod]
-        public void Should_generate_random()
-        {
-            ScenarioGenerator model = new ScenarioGenerator();
+        //[TestMethod]
+        //public void Should_generate_random()
+        //{
+        //    ScenarioGenerator model = new ScenarioGenerator();
 
-            int numbercall = 0;
-            ScenarioGenerator.WaitAction = () => numbercall++;
-            ScenarioGenerator.DispatcherInvocker = (action) => action();
+        //    int numbercall = 0;
+        //    ScenarioGenerator.WaitAction = () => numbercall++;
+        //    ScenarioGenerator.DispatcherInvocker = (action) => action();
 
-            model.Aleatoire(_publisherMocker, new System.Threading.CancellationToken());
+        //    model.Aleatoire(_publisherMocker, new System.Threading.CancellationToken());
 
-            Assert.AreEqual(numbercall, 1000);
-            A.CallTo(() => _publisherMocker.UpdateAllLeds(A<List<Brush>>.Ignored)).MustHaveHappened(1000, Times.Exactly);
+        //    Assert.AreEqual(numbercall, 1000);
+        //    A.CallTo(() => _publisherMocker.UpdateAllLeds(A<List<Brush>>.Ignored)).MustHaveHappened(1000, Times.Exactly);
 
-        }
+        //}
 
 
 
-        [TestMethod]
-        public void Should_generate_tail()
-        {
-            ScenarioGenerator model = new ScenarioGenerator();
+        //[TestMethod]
+        //public void Should_generate_tail()
+        //{
+        //    ScenarioGenerator model = new ScenarioGenerator();
 
-            int numbercall = 0;
-            ScenarioGenerator.WaitAction = () => numbercall++;
-            ScenarioGenerator.DispatcherInvocker = (action) => action();
+        //    int numbercall = 0;
+        //    ScenarioGenerator.WaitAction = () => numbercall++;
+        //    ScenarioGenerator.DispatcherInvocker = (action) => action();
 
-            model.Tail(_publisherMocker, new System.Threading.CancellationToken());
+        //    model.Tail(_publisherMocker, new System.Threading.CancellationToken());
 
-            Assert.AreEqual(numbercall, 1000);
-            A.CallTo(() => _publisherMocker.UpdateAllLeds(A<List<Brush>>.Ignored)).MustHaveHappened(1000, Times.Exactly);
+        //    Assert.AreEqual(numbercall, 1000);
+        //    A.CallTo(() => _publisherMocker.UpdateAllLeds(A<List<Brush>>.Ignored)).MustHaveHappened(1000, Times.Exactly);
 
-        }
+        //}
     }
 }

@@ -1,123 +1,58 @@
 ﻿using RingScenarioGenerator.Helper;
+using RingScenarioGenerator.Model.Scenarii;
 using RingScenarioGenerator.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media;
+
 
 namespace RingScenarioGenerator
 {
 
     public class ScenarioGenerator : IScenarioGenerator
     {
-        public const int TOTAL_LED = 61;
+        private Dictionary<EScenario, AbstractScenario> _scenarii = new Dictionary<EScenario, AbstractScenario>();
 
-        Random rd = new Random();
-
-
-        public static Action WaitAction = () => System.Threading.Thread.Sleep(100);
-
-        public static Action<Action> DispatcherInvocker = (action) => Application.Current.Dispatcher.Invoke(action);
-
-
-        public void Christmas(IViewPublisher publisher, CancellationToken token)
+        private AbstractScenario Get(string scenario)
         {
-            for (int loopi = 0; loopi < 1000; loopi++)
+
+            var eScenario = (EScenario)Enum.Parse(typeof(EScenario), scenario);
+
+            if (_scenarii.ContainsKey(eScenario))
             {
-                DispatcherInvocker(() =>
-                {
-                    var colors = new List<Brush>();
-                    for (int i = 0; i < TOTAL_LED; i++)
-                    {
-                        var green = BrushHelper.BuildBrush(0, 255,0);
-                        colors.Add(green);
-                    }
-
-                    for(int i =0; i<5;i++)
-                    {
-                        var ind = rd.Next(0, TOTAL_LED);
-                        colors[ind] = BrushHelper.BuildBrush(255, 255, 255);
-                    }
-
-                    publisher.UpdateAllLeds(colors);
-                });
-
-                token.ThrowIfCancellationRequested();
-                WaitAction();
+                return _scenarii[eScenario];
             }
-        }
 
-
-
-        public void Aleatoire(IViewPublisher publisher, CancellationToken token)
-        {
-            for (int loopi = 0; loopi < 1000; loopi++)
+            AbstractScenario s = null;
+            switch (eScenario)
             {
-                DispatcherInvocker(()=>
-                {
-                    var colors = new List<Brush>();
-                    for (int i = 0; i < TOTAL_LED; i++)
+                case EScenario.Xmas:
                     {
-                        var random = getRandomBrush();
-                        colors.Add(random);
+                        s = new XmasScenario();
+                        break;
                     }
-
-                    publisher.UpdateAllLeds(colors);
-                });
-
-                token.ThrowIfCancellationRequested();
-                WaitAction();
-            }
-        }
-
-        private Brush getRandomBrush()
-        {
-            int r = rd.Next(0, 255);
-            int g = rd.Next(0, 255);
-            int b = rd.Next(0, 255);
-            return BrushHelper.BuildBrush(r, g, b);
-        }
-
-        public void Tail(IViewPublisher publisher, CancellationToken token)
-        {
-            int head = 0;
-            bool running = true;
-
-            int loop = 0;
-
-            while (loop <1000)
-            {
-                  DispatcherInvocker(() =>
-                  {
-                    var colors = new List<Brush>();
-                    for (int i = 0; i < TOTAL_LED; i++)
+                case EScenario.Tail:
                     {
-                        int blue = 0;
-                        if (i == head) { blue = 50; }
-                        if ((i - 1) == head) { blue = 150; }
-                        if ((i - 2) == head) { blue = 255; }
-
-                        colors.Add(BrushHelper.BuildBrush(0, 0, blue));
+                        s = new TailScenario();
+                        break;
                     }
-
-                    publisher.UpdateAllLeds(colors);
-                });
-
-                token.ThrowIfCancellationRequested();
-                head++;
-                if (head > TOTAL_LED)
-                {
-                    head = 0;
-                }
-                WaitAction();
-                loop++;
+                case EScenario.Random:
+                default:
+                    {
+                        s = new RandomScenario();
+                        break;
+                    }
             }
+            _scenarii.Add(eScenario, s);
+            return s;
+
         }
 
-
+        public void Animate(string scenario, IViewPublisher publisher, CancellationToken token)
+        {
+            var s = Get(scenario);
+            s.Animate(publisher, token);
+        }
     }
 }
