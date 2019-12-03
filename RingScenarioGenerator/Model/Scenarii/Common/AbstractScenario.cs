@@ -20,7 +20,7 @@ namespace RingScenarioGenerator.Model.Scenarii
 
         abstract public void Animate(IViewPublisher publisher, CancellationToken token);
 
-        protected static Action WaitAction = () => System.Threading.Thread.Sleep(100);
+        protected static Action WaitAction = () => Thread.Sleep(100);
 
         protected static Action<Action> DispatcherInvocker = (action) => Application.Current.Dispatcher.Invoke(action);
 

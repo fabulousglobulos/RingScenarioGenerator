@@ -20,14 +20,18 @@ namespace RingScenarioGenerator
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
+ 
     public partial class MainWindow : Window
     {
+        public static System.Windows.Threading.Dispatcher MainDispatcher { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = new MainViewModel();
 
             debugGrid_Click(null, null);
+            MainDispatcher = this.Dispatcher;
         }
 
         Visibility debugInfo = Visibility.Hidden;

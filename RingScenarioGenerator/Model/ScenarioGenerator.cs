@@ -3,7 +3,6 @@ using RingScenarioGenerator.Model.Scenarii;
 using RingScenarioGenerator.ViewModel;
 using System;
 using System.Collections.Generic;
-
 using System.Threading;
 
 
@@ -16,7 +15,6 @@ namespace RingScenarioGenerator
 
         private AbstractScenario Get(string scenario)
         {
-
             var eScenario = (EScenario)Enum.Parse(typeof(EScenario), scenario);
 
             if (_scenarii.ContainsKey(eScenario))
@@ -24,29 +22,10 @@ namespace RingScenarioGenerator
                 return _scenarii[eScenario];
             }
 
-            AbstractScenario s = null;
-            switch (eScenario)
-            {
-                case EScenario.Xmas:
-                    {
-                        s = new XmasScenario();
-                        break;
-                    }
-                case EScenario.Tail:
-                    {
-                        s = new TailScenario();
-                        break;
-                    }
-                case EScenario.Random:
-                default:
-                    {
-                        s = new RandomScenario();
-                        break;
-                    }
-            }
+            AbstractScenario s  = Activator.CreateInstance("RingScenarioGenerator", "RingScenarioGenerator.Model.Scenarii."+scenario+"Scenario") .Unwrap() as AbstractScenario; 
+
             _scenarii.Add(eScenario, s);
             return s;
-
         }
 
         public void Animate(string scenario, IViewPublisher publisher, CancellationToken token)

@@ -7,10 +7,5 @@ namespace RingScenarioGenerator
     public interface IScenarioGenerator
     {
         void Animate (string scenario, IViewPublisher publisher, CancellationToken token);
-
-
-        //void Aleatoire(IViewPublisher publisher, CancellationToken token);
-        //void Tail(IViewPublisher publisher, CancellationToken token);
-        //void Christmas(IViewPublisher publisher, CancellationToken token);
     }
 }

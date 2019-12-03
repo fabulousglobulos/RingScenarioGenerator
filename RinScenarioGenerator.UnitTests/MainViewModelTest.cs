@@ -13,23 +13,23 @@ namespace RinScenarioGenerator.UnitTests
     [TestClass]
     public class MainViewModelTest
     {
-        [TestMethod]
-        public void Should_update_all_binding()
-        {
-            MainViewModel vm = new MainViewModel();
+        //[TestMethod]
+        //public void Should_update_all_binding()
+        //{
+        //    MainViewModel vm = new MainViewModel();
 
-            var brushes = new List<Brush>();
-            for (int i = 0; i < AbstractScenario.TOTAL_LED; i++)
-            {
-                brushes.Add(BrushHelper.BuildBrush(i, i, i));
-            }
+        //    var brushes = new List<Brush>();
+        //    for (int i = 0; i < AbstractScenario.TOTAL_LED; i++)
+        //    {
+        //        brushes.Add(BrushHelper.BuildBrush(i, i, i));
+        //    }
 
-            vm.UpdateAllLeds(brushes);
+        //    vm.UpdateAllLeds(brushes);
 
-            SolidColorBrush Solid5_1 = vm.Brush5_1 as SolidColorBrush;
-            Assert.AreEqual(AbstractScenario.TOTAL_LED - 1, Solid5_1.Color.R);
-            Assert.AreEqual(AbstractScenario.TOTAL_LED - 1, Solid5_1.Color.G);
-            Assert.AreEqual(AbstractScenario.TOTAL_LED - 1, Solid5_1.Color.B);
-        }
+        //    SolidColorBrush Solid5_1 = vm.Brush5_1 as SolidColorBrush;
+        //    Assert.AreEqual(AbstractScenario.TOTAL_LED - 1, Solid5_1.Color.R);
+        //    Assert.AreEqual(AbstractScenario.TOTAL_LED - 1, Solid5_1.Color.G);
+        //    Assert.AreEqual(AbstractScenario.TOTAL_LED - 1, Solid5_1.Color.B);
+        //}
     }
 }

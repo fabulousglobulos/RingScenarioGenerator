@@ -83,7 +83,7 @@ namespace RingScenarioGenerator.ViewModel
         CancellationTokenSource source = new CancellationTokenSource();
         CancellationToken token;
 
-
+   
         public async void OnMyButtonClickImpl()
         {
             if (runingTask != null)
@@ -103,8 +103,7 @@ namespace RingScenarioGenerator.ViewModel
                 {
                     try
                     {
-                        //tail();
-                        _scenario.Animate(  _selectedScenario,  this, token);
+                        _scenario.Animate(  _selectedScenario,  this, token );
                     }
                     catch (OperationCanceledException)
                     {

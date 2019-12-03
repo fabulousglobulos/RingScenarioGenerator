@@ -13,6 +13,7 @@ namespace RingScenarioGenerator
     /// </summary>
     public partial class App : Application
     {
+
         public App()
         {
             AppDomain currentDomain = AppDomain.CurrentDomain;
