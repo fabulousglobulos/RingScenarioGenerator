@@ -14,7 +14,7 @@ using System.Collections.ObjectModel;
 
 namespace RingScenarioGenerator.ViewModel
 {
-    public partial class MainViewModel : INotifyPropertyChanged , IViewPublisher
+    public partial class MainViewModel : INotifyPropertyChanged, IViewPublisher
     {
 
         private string _selectedScenario;
@@ -42,9 +42,11 @@ namespace RingScenarioGenerator.ViewModel
         }
 
 
-        private IScenarioGenerator _scenario = null;   
+        private IScenarioGenerator _scenario = null;
 
         public ICommand OnMyButtonClick { get; set; }
+
+        public ICommand OnRecordScenearioClick { get; set; }
 
         public MainViewModel()
         {
@@ -58,6 +60,7 @@ namespace RingScenarioGenerator.ViewModel
 
 
             OnMyButtonClick = new RelayCommand(cmd => OnMyButtonClickImpl());
+            OnRecordScenearioClick = new RelayCommand(cmd => OnRecordScenearioClickImpl());
 
             _scenario = new ScenarioGenerator();
 
@@ -78,12 +81,42 @@ namespace RingScenarioGenerator.ViewModel
             }
         }
 
+        bool recording = false;
+        List<List<Brush>> _scenarioRecordded = new List<List<Brush>>();
+        public async void OnRecordScenearioClickImpl()
+        {
+
+            if (recording == false)
+            {//now we startsaving;
+                _scenarioRecordded.Clear();
+                recording = true;
+            }
+            else
+            {// stop recording
+                recording = false;
+
+                //save it
+                Action action = new Action(() =>
+                {
+                    try
+                    {
+                        _scenario.SaveToFile(_scenarioRecordded);
+                    }
+                    catch (Exception E)
+                    {
+                        MessageBox.Show(E.ToString());
+                    }
+                });
+
+                Task.Run(action);
+            }
+        }
 
         Task runingTask = null;
         CancellationTokenSource source = new CancellationTokenSource();
         CancellationToken token;
 
-   
+
         public async void OnMyButtonClickImpl()
         {
             if (runingTask != null)
@@ -103,7 +136,7 @@ namespace RingScenarioGenerator.ViewModel
                 {
                     try
                     {
-                        _scenario.Animate(  _selectedScenario,  this, token );
+                        _scenario.Animate(_selectedScenario, this, token);
                     }
                     catch (OperationCanceledException)
                     {
@@ -118,10 +151,15 @@ namespace RingScenarioGenerator.ViewModel
                 runingTask = Task.Run(action, token);
             }
         }
- 
+
 
         public void UpdateAllLeds(List<Brush> colors)
         {
+            if (recording == true)
+            {
+                _scenarioRecordded.Add(colors);
+            }
+
             Brush1_1 = colors[00];
             Brush1_2 = colors[01];
             Brush1_3 = colors[02];

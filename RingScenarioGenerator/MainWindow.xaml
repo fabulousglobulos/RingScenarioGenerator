@@ -11,7 +11,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
                 <RowDefinition Height="470"/>
-                <RowDefinition Height="150" />
+                <RowDefinition Height="200" />
             </Grid.RowDefinitions>
             <Canvas Background="black" Margin="0" Grid.Column="0" Grid.Row="1" Height="450" Width="450">
 
@@ -109,6 +109,7 @@
                 <ListBox  Name="listScenarii" HorizontalContentAlignment="Stretch" SelectionMode="Extended" MaxHeight="100" MinHeight="10"   ItemsSource="{Binding ScenarioCollection}"  SelectedItem="{Binding SelectedScenario}" />
                 <Button Command="{Binding Path=OnMyButtonClick}"  FontStretch="Normal"  Margin="2" Content="Run selected scenario"/>
                 <Button  FontStretch="Normal"  Margin="2" Content="Debug grid layout" Click="debugGrid_Click"/>
+                <Button Command="{Binding Path=OnRecordScenearioClick}"  FontStretch="Normal"  Margin="2" Content="start / stop recording current scenario"/>
             </StackPanel>
         </Grid>
 

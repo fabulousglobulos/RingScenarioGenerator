@@ -22,7 +22,7 @@ namespace RingScenarioGenerator.Model.Scenarii
 
         protected static Action WaitAction = () => Thread.Sleep(100);
 
-        protected static Action<Action> DispatcherInvocker = (action) => Application.Current.Dispatcher.Invoke(action);
+        public  static Action<Action> DispatcherInvocker = (action) => Application.Current.Dispatcher.Invoke(action);
 
     }
 }
