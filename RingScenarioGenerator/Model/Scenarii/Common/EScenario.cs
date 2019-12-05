@@ -15,6 +15,7 @@ namespace RingScenarioGenerator.Model.Scenarii
         File,
         Xmas,
         Tail,
-        Random
+        Random,
+        Side
     }
 }

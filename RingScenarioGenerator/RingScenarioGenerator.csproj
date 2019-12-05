@@ -61,6 +61,7 @@
     <Compile Include="Model\Scenarii\Common\EScenario.cs" />
     <Compile Include="Model\Scenarii\Common\AbstractScenario.cs" />
     <Compile Include="Model\Scenarii\FileScenario.cs" />
+    <Compile Include="Model\Scenarii\SideScenario.cs" />
     <Compile Include="Model\Scenarii\RandomScenario.cs" />
     <Compile Include="Model\Scenarii\TailScenario.cs" />
     <Compile Include="Model\Scenarii\XmasScenario.cs" />
