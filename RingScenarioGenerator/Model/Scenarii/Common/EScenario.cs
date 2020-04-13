@@ -16,6 +16,8 @@ namespace RingScenarioGenerator.Model.Scenarii
         Xmas,
         Tail,
         Random,
-        Side
+        Side,
+        ColorZoom,
+        SnakeRainbow
     }
 }
